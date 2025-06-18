@@ -1,5 +1,28 @@
 const jwt = require("jsonwebtoken");
-const JWT_SECRET = process.env.JWT_SECRET;
+const jwksClient = require("jwks-rsa");
+
+const client = jwksClient({
+  jwksUri: process.env.AUTH0_URI + ".well-known/jwks.json",
+  cache: true,
+  rateLimit: true,
+  jwksRequestsPerMinute: 5,
+});
+
+function getKey(header, callback) {
+  client.getSigningKey(header.kid, function (err, key) {
+    if (err) {
+      console.error("❌ Error getting signing key:", err);
+      return callback(err);
+    }
+
+    const signingKey = key?.getPublicKey?.() || key?.publicKey;
+    if (!signingKey) {
+      return callback(new Error("No signing key found"));
+    }
+
+    callback(null, signingKey);
+  });
+}
 
 module.exports = function (req, res, next) {
   const authHeader = req.headers.authorization;
@@ -9,11 +32,22 @@ module.exports = function (req, res, next) {
 
   const token = authHeader.split(" ")[1];
 
-  try {
-    const decoded = jwt.verify(token, JWT_SECRET);
-    req.user = decoded; // ✅ Attach userId to request
-    next();
-  } catch (err) {
-    res.status(403).json({ error: "Invalid or expired token." });
-  }
+  jwt.verify(
+    token,
+    getKey,
+    {
+      algorithms: ["RS256"],
+      issuer: process.env.AUTH0_URI,
+      audience: process.env.AUTH0_API,
+    },
+    (err, decoded) => {
+      if (err) {
+        console.error("❌ JWT verification failed:", err);
+        return res.status(403).json({ error: "Invalid or expired token." });
+      }
+
+      req.user = decoded;
+      next();
+    }
+  );
 };

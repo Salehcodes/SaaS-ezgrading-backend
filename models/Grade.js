@@ -5,7 +5,7 @@ const GradeSchema = new mongoose.Schema({
   grades: [Number],
   total: Number,
   exam: String,
-  userId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+  userId: String,
 });
 
 module.exports = mongoose.model("Grade", GradeSchema);
