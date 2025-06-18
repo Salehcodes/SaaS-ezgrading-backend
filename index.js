@@ -7,7 +7,7 @@ const gradesRoutes = require("./routes/grades");
 const authRoutes = require("./routes/authentication");
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 4000;
 
 app.use(cors());
 app.use(bodyParser.json());
