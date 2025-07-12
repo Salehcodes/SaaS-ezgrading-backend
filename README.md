@@ -1,7 +1,10 @@
+
 # 🎤 **SaaS ezgrading**: Automated Grading & Mapping System
 
-**SaaS ezgrading** is an innovative tool designed to assist teachers in **grading exams** and **mapping scores** into Excel files using **speech-to-text** technology. Rather than manually filling out rows for each student’s score, this platform automates the process, saving time and reducing errors. Simply speak the scores, and the system will generate the Excel file for you!
-[https://ezgrading.vercel.app]
+**SaaS ezgrading** is an innovative tool designed to assist teachers after **grading exams** with **mapping scores** into Excel files using **speech-to-text** technology. Rather than manually filling out rows for each student’s score, this platform automates the process, saving time and reducing errors. Simply speak the scores, and the system will generate the Excel file for you!
+
+**visit the site to check it out:** https://ezgrading.vercel.app
+
 ---
 
 ## 🚀 Features
@@ -27,6 +30,9 @@
 - 📝 **Customizable Grading**  
   Support for different exam formats—teachers can map answers to any question, and the system adjusts accordingly.
 
+- 🔐 **Secure Authentication with Auth0**  
+  **Auth0** is integrated for secure user authentication. Teachers can sign in to the platform securely using their preferred login methods (Google, Facebook, etc.).
+
 ---
 
 ## 🔧 Tech Stack
@@ -39,6 +45,7 @@
 | 🗃️ **MongoDB**    | NoSQL database to store student data and exam details   |
 | ⚡ **Express.js**  | Fast and flexible backend framework                     |
 | 🧑‍💻 **React.js** | Frontend library for building the user interface        |
+| 🔐 **Auth0**       | Authentication and authorization as a service for secure login |
 
 ---
 
@@ -71,6 +78,13 @@ _Coming soon!_ (You can add screenshots or videos of how the system works, showc
    ```
    The frontend will be available at [http://localhost:3000](http://localhost:3000).
 
+4. **Configure Auth0 Integration**
+   Ensure you configure your **Auth0 client ID** and **domain** in the frontend `.env` file:
+   ```env
+   REACT_APP_AUTH0_CLIENT_ID=your_auth0_client_id
+   REACT_APP_AUTH0_DOMAIN=your_auth0_domain
+   ```
+
 ### Backend (API)
 
 1. **Clone the Backend Repository**
@@ -90,6 +104,9 @@ _Coming soon!_ (You can add screenshots or videos of how the system works, showc
    ```env
    MONGO_URI=mongodb://localhost:27017/ezgrading
    SPEECH_TO_TEXT_API_KEY=your_speech_to_text_api_key
+   AUTH0_CLIENT_ID=your_auth0_client_id
+   AUTH0_CLIENT_SECRET=your_auth0_client_secret
+   AUTH0_DOMAIN=your_auth0_domain
    PORT=5000
    ```
 
@@ -110,10 +127,10 @@ _Coming soon!_ (You can add screenshots or videos of how the system works, showc
 client/
 ├── src/
 │   ├── components/          # React components for UI
-│   ├── services/            # API services and logic
+│   ├── services/            # API services and authentication logic (including Auth0 integration)
 │   ├── pages/               # Different views for users (teacher dashboard, etc.)
 │   └── App.js               # Main app component
-└── .env                     # Environment configuration file
+└── .env                     # Environment configuration file (includes Auth0 settings)
 ```
 
 ### Backend (API)
@@ -123,7 +140,7 @@ SaaS-ezgrading-backend/
 ├── controllers/             # Logic for handling API requests (grading, speech to text)
 ├── models/                  # Mongoose models for data structures
 ├── routes/                  # API route definitions
-├── middleware/              # Authentication and other middleware
+├── middleware/              # Authentication and other middleware (including Auth0 validation)
 ├── .env                     # Environment configuration file
 └── server.js                # Main server file to start the app
 ```
@@ -165,5 +182,8 @@ If you find this project useful, please give it a ⭐️ on GitHub and share it 
 
 - **Multi-language Support**: Support for speech-to-text in multiple languages.
 - **Improved Accuracy**: Implement machine learning algorithms to enhance speech recognition accuracy.
+- **Bulk Import/Export**: Ability to import/export exam results in bulk via CSV or Excel.
 
+---
 
+Now, with **Auth0** added to the tech stack, the README accurately reflects its role in the system's secure authentication and authorization process. Teachers can sign in easily, and their data is securely handled. Let me know if you need anything else!
