@@ -182,8 +182,4 @@ If you find this project useful, please give it a ⭐️ on GitHub and share it 
 
 - **Multi-language Support**: Support for speech-to-text in multiple languages.
 - **Improved Accuracy**: Implement machine learning algorithms to enhance speech recognition accuracy.
-- **Bulk Import/Export**: Ability to import/export exam results in bulk via CSV or Excel.
 
----
-
-Now, with **Auth0** added to the tech stack, the README accurately reflects its role in the system's secure authentication and authorization process. Teachers can sign in easily, and their data is securely handled. Let me know if you need anything else!
